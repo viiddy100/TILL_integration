@@ -1,0 +1,23 @@
+#Makefile template for shared library
+CFLAGS = -fPIC -O3 -g -Wall -Werror
+CC = g++
+NAME = shared
+#JAVA = /home/vfisdk/TILL_DEMO/java/JavaToC
+LIB = sharedlib
+PROJECTPATH = /home/vfisdk/TILL_DEMO/lib/
+JAVAPATH = /usr/lib/jvm/java-7-openjdk/include
+
+#all:    $(JAVA).class
+#	java -Djava.library.path=$(JAVA) JavaToC
+
+#$(JAVA).h:	$(JAVA).java
+#	javah $(JAVA)
+
+$(LIB).so:	$(NAME).cpp
+	$(CC) $(CFLAGS) -shared  -I$(JAVAPATH) -I$(JAVAPATH)/linux -I$(PROJECTPATH) -o $(PROJECTPATH)$(LIB).so $(PROJECTPATH)$(NAME).cpp
+
+#$(JAVA).class:  
+#	javac $(JAVA).java
+
+clean:
+	$(RM) $(NAME)*.o *.so*
